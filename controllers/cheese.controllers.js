@@ -42,7 +42,29 @@ const postCheese = async (req, res) => {
     })
 }
 
+const putCheese = async (req, res) => {
+    const {id} = req.params;
+    const {_id, __v, ...resto} = req.body;
+
+    const cheese = await Cheese.findByIdAndUpdate(id, resto,{new:true});
+
+    res.json({
+        msg: "Cheese actualizado correctamente",
+        cheese
+    })
+};
+
+const deleteCheese = async (req, res) => {
+    const {id} = req.params;
+
+    const cheese = await Cheese.findByIdAndUpdate(id, {state: false});
+
+    res.json(cheese)
+}
+
 module.exports = {
     getCheese,
-    postCheese
+    postCheese,
+    putCheese,
+    deleteCheese
 }
