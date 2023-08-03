@@ -21,7 +21,7 @@ const router = Router();
 
 // Crear categoria - privado - cualquier persona con un token válido
 router.get('/', getCategoria);
-router.post('/:id', [ 
+router.post('/', [ 
    validateJWT, 
     check('nombre','El nombre es obligatorio').not().isEmpty(),
     validateDocuments,

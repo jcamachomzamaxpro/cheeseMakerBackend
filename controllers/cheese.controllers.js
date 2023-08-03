@@ -18,10 +18,31 @@ const getCheese = async (req, res) => {
 }
 
 const postCheese = async (req, res) => {
-    const {datos} = req.body
-    res.json(datos)
+    const {name, state, price, categoria, descripcion, avalaible} = req.body;
+
+    const datos = {
+        name,
+        state,
+        usuario: req.usuario._id,
+        price,
+        categoria,
+        descripcion,
+        avalaible
+    }
+
+    const cheese = new Cheese(datos);
+
+    
+    
+    // Guardar en MONGODB
+    await cheese.save();
+    res.json({
+        "message":"post api",
+        cheese
+    })
 }
 
 module.exports = {
+    getCheese,
     postCheese
 }
